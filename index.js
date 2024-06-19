@@ -18,13 +18,27 @@ const parseDateString = rawDate =>
 
  /* NB! This function convert source date to CURRENT SYSTEM TIMEZONE
   * if you need to convert time from one timezone to another specific timezone
-  * you should use another approach
+  * you should:
+  * 1. Convert date to current timezone
+  * 2. Get utc time
+  * 3. convert utc to target timezone
   */
 const convertToSystemTimeZone = (rawDate, fromTimeZone) => {
   const date = parseDateString(rawDate);
   return fromZonedTime(date, fromTimeZone);
 };
 
+const convert = (rawDate, fromTimeZone, toTimeZone) => {
+  const normalizedDateString = parseDateString(rawDate);
+  const zonedDate = fromZonedTime(normalizedDateString, fromTimeZone);
+  return toZonedTime(zonedDate.getTime(), toTimeZone);
+};
+
+console.log('current time zone');
 console.log('summer', convertToSystemTimeZone('240619164815', 'Europe/Athens'));
 console.log('winter', convertToSystemTimeZone('240219164815', 'Europe/Athens'));
 
+
+console.log('poland time'); // there is DST in poland, so offset is constant
+console.log('summer', convert('240619164815', 'Europe/Athens', 'Europe/Warsaw'));
+console.log('winter', convert('240219164815', 'Europe/Athens', 'Europe/Warsaw'));
