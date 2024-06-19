@@ -8,7 +8,7 @@ module.exports = [
   [ '200204065550', 'Europe/Kyiv', 'Europe/Samara' ], // winter 
   [ '200604065550', 'Europe/Kyiv', 'Europe/Samara' ], // summer 
 
-  // There is no DST in Russian and Belarus
+  // There is no DST in Russia and Belarus
   [ '200204065551', 'Europe/Minsk', 'Europe/Samara' ], // winter 
   [ '200604065551', 'Europe/Minsk', 'Europe/Samara' ], // summer 
 

@@ -4,7 +4,7 @@ const { fromZonedTime, toZonedTime } = require('date-fns-tz');
 const SOURCE_DATE_FORMAT = 'yyMMddHHmmss';
 
  /*
-  * convert date string from yymmddhhmmss to 20yy-mm-ddThh:mm:ss:00
+  * create date from string in format yymmddhhmmss
   * every unit of source date contains two digits
   * 2 digits for year (yy)
   * 2 digits for month (MM)
