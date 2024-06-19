@@ -1,23 +1,28 @@
-const { fromZonedTime } = require('date-fns-tz');
+const { parse } = require('date-fns');
+const { fromZonedTime, toZonedTime } = require('date-fns-tz');
 
-const SOURCE_DATE_REGEXP = /(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})?/;
-
-const TARGET_DATE_PATTERN = '20$1-$2-$3T$4:$5:00';
+const SOURCE_DATE_FORMAT = 'yyMMddHHmmss';
 
  /*
   * convert date string from yymmddhhmmss to 20yy-mm-ddThh:mm:ss:00
   * every unit of source date contains two digits
   * 2 digits for year (yy)
-  * 2 digits for month (mm)
+  * 2 digits for month (MM)
   * ...
   * 2 digits for seconds (ss)
+  * 
+  * more about date formats: https://date-fns.org/v3.6.0/docs/parse
   */
-const convertDateString = rawDate =>
-    rawDate.replace(SOURCE_DATE_REGEXP, TARGET_DATE_PATTERN);
+const parseDateString = rawDate =>
+  parse(rawDate, SOURCE_DATE_FORMAT, new Date());
 
+ /* NB! This function convert source date to CURRENT SYSTEM TIMEZONE
+  * if you need to convert time from one timezone to another specific timezone
+  * you should firstly convert date to current timezone, get utc
+  */
 const convertToSystemTimeZone = (rawDate, fromTimeZone) => {
-  const normalizedDateString = convertDateString(rawDate);
-  return fromZonedTime(normalizedDateString, fromTimeZone)
+  const date = parseDateString(rawDate);
+  return fromZonedTime(date, fromTimeZone);
 };
 
 console.log('summer', convertToSystemTimeZone('240619164815', 'Europe/Athens'));
