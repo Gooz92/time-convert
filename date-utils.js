@@ -29,8 +29,7 @@ const convertToSystemTimeZone = (rawDate, fromTimeZone) => {
 };
 
 const convert = (rawDate, fromTimeZone, toTimeZone) => {
-  const date = parseDateString(rawDate);
-  const zonedDate = fromZonedTime(date, fromTimeZone);
+  const zonedDate = convertToSystemTimeZone(rawDate, fromTimeZone);
   return toZonedTime(zonedDate.getTime(), toTimeZone);
 };
 
