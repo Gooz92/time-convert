@@ -34,11 +34,16 @@ const convert = (rawDate, fromTimeZone, toTimeZone) => {
   return toZonedTime(zonedDate.getTime(), toTimeZone);
 };
 
+// NB!!! console.log by default print date in UTC
+
+console.log('current utc', new Date());
+console.log('current', new Date().toString());
+
 console.log('current time zone');
-console.log('summer', convertToSystemTimeZone('240619164815', 'Europe/Athens'));
-console.log('winter', convertToSystemTimeZone('240219164815', 'Europe/Athens'));
+console.log('summer', convertToSystemTimeZone('240619164815', 'Europe/Athens').toString());
+console.log('winter', convertToSystemTimeZone('240219164815', 'Europe/Athens').toString());
 
 
 console.log('poland time'); // there is DST in poland, so offset is constant
-console.log('summer', convert('240619164815', 'Europe/Athens', 'Europe/Warsaw'));
-console.log('winter', convert('240219164815', 'Europe/Athens', 'Europe/Warsaw'));
+console.log('summer', convert('240619164815', 'Europe/Athens', 'Europe/Warsaw').toString());
+console.log('winter', convert('240219164815', 'Europe/Athens', 'Europe/Warsaw').toString());
