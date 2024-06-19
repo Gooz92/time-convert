@@ -18,7 +18,7 @@ const parseDateString = rawDate =>
 
  /* NB! This function convert source date to CURRENT SYSTEM TIMEZONE
   * if you need to convert time from one timezone to another specific timezone
-  * you should firstly convert date to current timezone, get utc
+  * you should use another approach
   */
 const convertToSystemTimeZone = (rawDate, fromTimeZone) => {
   const date = parseDateString(rawDate);
